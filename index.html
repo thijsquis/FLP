@@ -1,0 +1,512 @@
+!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reasons Why I Love You 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c73866;
+            --secondary: #ff6b9d;
+            --accent: #ffc2d1;
+            --dark: #2d1b2e;
+            --light: #fff5f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0ef 50%, #ffd4e5 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decoratieve achtergrond */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(199, 56, 102, 0.1) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(199, 56, 102, 0.2);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--dark);
+            opacity: 0.8;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .person-name {
+            font-size: 2em;
+            color: var(--secondary);
+            font-weight: 600;
+            margin: 20px 0;
+            display: inline-block;
+            position: relative;
+        }
+
+        .person-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card-wrapper {
+            perspective: 1000px;
+            height: 350px;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .card-wrapper:nth-child(1) { animation-delay: 0.1s; }
+        .card-wrapper:nth-child(2) { animation-delay: 0.2s; }
+        .card-wrapper:nth-child(3) { animation-delay: 0.3s; }
+        .card-wrapper:nth-child(4) { animation-delay: 0.4s; }
+        .card-wrapper:nth-child(5) { animation-delay: 0.5s; }
+        .card-wrapper:nth-child(6) { animation-delay: 0.6s; }
+        .card-wrapper:nth-child(7) { animation-delay: 0.7s; }
+        .card-wrapper:nth-child(8) { animation-delay: 0.8s; }
+        .card-wrapper:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(199, 56, 102, 0.2);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .card-back {
+            background: white;
+            color: var(--dark);
+            transform: rotateY(180deg);
+        }
+
+        .card-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            font-weight: 700;
+            opacity: 0.3;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+        }
+
+        .card-front .card-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        }
+
+        .card-front h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-back p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 15px;
+            font-size: 0.85em;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .card-front .flip-hint {
+            color: white;
+        }
+
+        .card-back .flip-hint {
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 20px;
+            animation: fadeIn 2s ease-out 1s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .footer-signature {
+            font-size: 1.2em;
+            color: var(--dark);
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Hover effecten */
+        .card-wrapper:hover .card:not(.flipped) {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .person-name {
+                font-size: 1.5em;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card-wrapper {
+                height: 320px;
+            }
+
+            .footer-message {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Floating hearts decoratie */
+        .floating-heart {
+            position: fixed;
+            font-size: 20px;
+            opacity: 0;
+            pointer-events: none;
+            animation: floatHeart 4s ease-in-out;
+            z-index: 1000;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Bedrijf footer */
+        .business-footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(199, 56, 102, 0.1);
+            text-align: center;
+        }
+
+        .business-footer p {
+            font-size: 0.95em;
+            color: var(--dark);
+            opacity: 0.6;
+        }
+
+        .creator-name {
+            color: var(--primary);
+            font-weight: 600;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Reasons Why</h1>
+            <h1>I Love You</h1>
+            <div class="person-name" id="personName">Laranne</div>
+            <p class="subtitle">Klik op de kaartjes om ze om te draaien 💕</p>
+        </header>
+
+        <div class="cards-grid" id="cardsGrid">
+            <!-- Kaartjes worden hier dynamisch toegevoegd -->
+        </div>
+
+        <footer>
+            <p class="footer-message">You mean the world to me</p>
+            <p class="footer-signature">Met alle liefde, <span id="senderName">[Jouw Naam]</span> ❤️</p>
+        </footer>
+
+        <div class="business-footer">
+            <p>Made by <span class="creator-name" id="creatorName">[Jouw Naam]</span></p>
+        </div>
+    </div>
+
+    <script>
+        // ===== PERSONALISATIE - PAS DIT AAN! =====
+        const PERSON_NAME = "Laranne";  // Bijv: "Sarah"
+        const SENDER_NAME = "Thijs";      // Bijv: "Michael"
+        const CREATOR_NAME = "Thijs #eatingnevercheating";     // Voor de footer - kan zelfde zijn of anders
+
+        // Voeg hier je eigen redenen toe! Je kunt er zoveel toevoegen als je wilt
+        const REASONS = [
+            {
+                icon: "😊",
+                title: "Your Smile",
+                reason: "Je glimlach maakt elke dag zoveel mooier. Het is het eerste waar ik aan denk en het laatste wat ik 's avonds wil zien."
+            },
+            {
+                icon: "🎵",
+                title: "Your Laugh",
+                reason: "Je lach is als muziek voor mijn oren. Ik zou alles doen om je te horen lachen, want het maakt me zo gelukkig."
+            },
+            {
+                icon: "💪",
+                title: "Your Strength",
+                reason: "Je kracht en doorzettingsvermogen inspireren me elke dag. Je laat zien dat alles mogelijk is als je het echt wilt."
+            },
+            {
+                icon: "❤️",
+                title: "Your Kindness",
+                reason: "Je hebt het grootste hart van iedereen die ik ken. De manier waarop je voor anderen zorgt is echt bijzonder."
+            },
+            {
+                icon: "🌟",
+                title: "Your Dreams",
+                reason: "Je dromen en ambities maken je zo bijzonder. Ik ben zo trots op alles wat je bereikt en wat je nog gaat bereiken."
+            },
+            {
+                icon: "🤗",
+                title: "Your Hugs",
+                reason: "In jouw armen voel ik me thuis. Het is de veiligste plek ter wereld en waar ik altijd wil terugkeren."
+            },
+            {
+                icon: "🎨",
+                title: "Your Creativity",
+                reason: "De manier waarop jij naar de wereld kijkt is uniek en prachtig. Je creativiteit inspireert me om dingen anders te zien."
+            },
+            {
+                icon: "💎",
+                title: "Your Uniqueness",
+                reason: "Je bent zo ontzettend jezelf en dat is precies wat je zo speciaal maakt. Er is niemand zoals jij en daar hou ik van."
+            },
+            {
+                icon: "🌈",
+                title: "Everything",
+                reason: "Maar vooral hou ik van je omdat je JIJ bent. Alles bij elkaar maakt je tot de meest bijzondere persoon in mijn leven."
+            }
+        ];
+        // ===== EINDE PERSONALISATIE =====
+
+        // Namen invullen
+        document.getElementById('personName').textContent = PERSON_NAME;
+        document.getElementById('senderName').textContent = SENDER_NAME;
+        document.getElementById('creatorName').textContent = CREATOR_NAME;
+
+        // Kaartjes genereren
+        const cardsGrid = document.getElementById('cardsGrid');
+        
+        REASONS.forEach((reason, index) => {
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'card-wrapper';
+            
+            cardWrapper.innerHTML = `
+                <div class="card">
+                    <div class="card-face card-front">
+                        <span class="card-number">${index + 1}</span>
+                        <div class="card-icon">${reason.icon}</div>
+                        <h3>${reason.title}</h3>
+                        <span class="flip-hint">Klik om te lezen</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <span class="card-number">${index + 1}</span>
+                        <p>${reason.reason}</p>
+                        <span class="flip-hint">Klik om terug te draaien</span>
+                    </div>
+                </div>
+            `;
+            
+            cardsGrid.appendChild(cardWrapper);
+            
+            // Click event voor flip
+            const card = cardWrapper.querySelector('.card');
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+                createFloatingHeart(cardWrapper);
+            });
+        });
+
+        // Floating hearts effect bij flip
+        function createFloatingHeart(element) {
+            const rect = element.getBoundingClientRect();
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = ['💕', '💖', '💗', '💓', '❤️'][Math.floor(Math.random() * 5)];
+            heart.style.left = rect.left + rect.width / 2 + 'px';
+            heart.style.top = rect.top + rect.height / 2 + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Easter egg: dubbel klik op header voor extra hartjes
+        let clickCount = 0;
+        document.querySelector('header').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 2) {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'floating-heart';
+                        heart.textContent = '💖';
+                        heart.style.left = Math.random() * window.innerWidth + 'px';
+                        heart.style.top = Math.random() * window.innerHeight + 'px';
+                        document.body.appendChild(heart);
+                        setTimeout(() => heart.remove(), 4000);
+                    }, i * 100);
+                }
+                clickCount = 0;
+            }
+            setTimeout(() => clickCount = 0, 500);
+        });
+    </script>
+</body>
+</html>
